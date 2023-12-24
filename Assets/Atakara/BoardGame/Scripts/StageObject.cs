@@ -11,6 +11,12 @@ public class StageObject : MonoBehaviour
     [SerializeField]
     public int height = 5; // 高さ
 
+    [SerializeField]
+    private Color color1 = Color.white; // 一つ目の色
+
+    [SerializeField]
+    private Color color2 = Color.black; // 二つ目の色
+
     void Start()
     {
         GenerateTiles();
@@ -25,6 +31,13 @@ public class StageObject : MonoBehaviour
                 // タイルのインスタンスを生成
                 GameObject newTile = Instantiate(tilePrefab, new Vector3(x, 0, y), Quaternion.identity);
                 newTile.transform.parent = this.transform; // 生成されたタイルをこのオブジェクトの子にする
+
+                // 市松模様の色を適用
+                Renderer tileRenderer = newTile.GetComponent<Renderer>();
+                if (tileRenderer != null)
+                {
+                    tileRenderer.material.color = (x + y) % 2 == 0 ? color1 : color2;
+                }
             }
         }
     }
