@@ -38,6 +38,9 @@ public class StageObject : MonoBehaviour
                 {
                     tileRenderer.material.color = (x + y) % 2 == 0 ? color1 : color2;
                 }
+                
+                Tile tileComponent = newTile.GetComponent<Tile>();
+                tileComponent.Position = new Vector2Int(x, y);
             }
         }
     }
